@@ -1,0 +1,19 @@
+name: ordinal
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy
+  - h5py
+  - arviz
+  - matplotlib
+  - pandas
+  - scipy
+  - seaborn
+  - python=3.12
+  - jupyterlab
+  - ipywidgets
+  - numpyro
+  - jax
+  - jaxlib
+  - parse
