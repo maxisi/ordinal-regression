@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 d = pd.read_csv('raw_data.csv').T
 
@@ -29,8 +30,19 @@ d = d.reset_index()
 
 d.to_csv('ranking_data.csv', index=False)
 
+judges = d['Judge'].unique()
+candidates = d.columns[2:]
+
 # anonymize data
 d.columns = ['Judge', 'Category'] + [f'Candidate-{i}' for i in range(len(d.columns)-2)]
 d['Judge'] = judges_anon
 
 d.to_csv('ranking_data_anon.csv', index=False)
+
+judge_map = dict(zip(d['Judge'].unique(), judges))
+with open('judge_names.json', 'w') as f:
+    json.dump(judge_map, f, indent=4)
+
+candidate_map = dict(zip(d.columns[2:], candidates))
+with open('candidate_names.json', 'w') as f:
+    json.dump(candidate_map, f, indent=4)
